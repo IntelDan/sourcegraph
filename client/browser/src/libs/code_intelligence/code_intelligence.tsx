@@ -48,7 +48,6 @@ import {
     toURIWithPath,
     ViewStateSpec,
 } from '../../../../../shared/src/util/url'
-import { sendMessage } from '../../browser/runtime'
 import { isInPage } from '../../context'
 import { ERPRIVATEREPOPUBLICSOURCEGRAPHCOM } from '../../shared/backend/errors'
 import { createLSPFromExtensions, toTextDocumentIdentifier } from '../../shared/backend/lsp'
@@ -363,9 +362,7 @@ export function handleCodeHost({
             catchError(() => [false])
         )
 
-    const openOptionsMenu = () => {
-        sendMessage({ type: 'openOptionsPage' })
-    }
+    const openOptionsMenu = () => browser.runtime.sendMessage({ type: 'openOptionsPage' })
 
     const addedElements = mutations.pipe(
         concatAll(),
